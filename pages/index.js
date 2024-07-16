@@ -76,7 +76,7 @@ export default function Home() {
                   ref={textTwo}
                   className="text-3xl tablet:text-6xl laptop:text-6xl laptopl:text-8xl p-1 tablet:p-2 text-bold w-full laptop:w-4/5"
                 >
-                  I'm Dev
+                  I&apos;m Dev
                 </h1>
                 <p ref={textThree} className="mt-2 opacity-50 text-lg">I am a backend developer with expertise in Node.js. I have experience in building scalable, secure and reliable web applications using various frameworks and technologies</p>
               </div>
@@ -113,7 +113,7 @@ export default function Home() {
                 >
                   About Me
                 </h1>
-                <div class="grid grid-cols-1 divide-y">
+                <div className="grid grid-cols-1 divide-y">
                   <div className="grid grid-cols-2 gap-2 desktop:p-5 tablet:p-2 mob:p-2">
                     <div className="opacity-50 text-lg">Name:</div>
                     <div className="opacity-50 text-lg">Trung</div>

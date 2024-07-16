@@ -34,7 +34,7 @@ const Resume = () => {
                 <Header />
                 <div className="flex flex-col justify-around laptop:mt-20 mt-10 laptop:p-5">
                     <div className="text-3xl tablet:text-6xl laptop:text-6xl laptopl:text-8xl p-1 tablet:p-2 text-bold w-4/5 mob:w-full laptop:w-4/5">
-                        Let's Get in Touch: Ways to Connect with Me
+                        Let&apos;s Get in Touch: Ways to Connect with Me
                     </div>
 
                     <div className="mt-2 opacity-50 text-lg">
@@ -50,7 +50,7 @@ const Resume = () => {
                         24 hours, although it may take me longer during busy
                         periods. Alternatively, you can use the contact form
                         on my website to get in touch. Simply fill out the
-                        required fields and I'll get back to you as soon as
+                        required fields and I&apos;ll get back to you as soon as
                         possible. Finally, if you prefer to connect on
                         social media, you can find me on{" "}
                         <a
@@ -62,7 +62,7 @@ const Resume = () => {
                             https://instagram.com/
                         </a>
                         . I post regular updates and engage with my
-                        followers there, so don't hesitate to reach out.
+                        followers there, so don&apos;t hesitate to reach out.
                         Thanks again for your interest, and I look forward
                         to hearing from you!
                     </div>
