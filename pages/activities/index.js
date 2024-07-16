@@ -7,6 +7,7 @@ import Cursor from "../../components/Cursor";
 import Header from "../../components/Header";
 import { ISOToDate, useIsomorphicLayoutEffect } from "../../utils";
 import { getAllPosts } from "../../utils/api";
+import Footer from "../../components/Footer";
 const Blog = ({ posts }) => {
   const text = useRef();
   const router = useRouter();
@@ -20,13 +21,15 @@ const Blog = ({ posts }) => {
   }, []);
 
   return (
-    <>
+    <div className="relative cursor-none">
       <Cursor />
       <Head>
         <title>Blog</title>
       </Head>
+      <div className="gradient-circle"></div>
+      <div className="gradient-circle-bottom"></div>
       <div
-        className="container mx-auto mb-10 cursor-none"
+        className="container mx-auto mb-10"
       >
         <Header isBlog={true}></Header>
         <div className="mt-10 laptop:p-3">
@@ -58,8 +61,9 @@ const Blog = ({ posts }) => {
               ))}
           </div>
         </div>
+        <Footer />
       </div>
-    </>
+    </div>
   );
 };
 

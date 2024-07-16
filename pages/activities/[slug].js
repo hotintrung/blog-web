@@ -17,18 +17,20 @@ const BlogPost = ({ post }) => {
   }, []);
 
   return (
-    <>
+    <div className="relative cursor-none">
       <Head>
         <title>{"Blog - " + post.title}</title>
         <meta name="description" content={post.preview} />
       </Head>
+      <div className="gradient-circle"></div>
+      <div className="gradient-circle-bottom"></div>
       <Cursor />
 
       <div
-        className="container mx-auto mt-10 cursor-none"
+        className="container mx-auto mt-10"
       >
         <Header isBlog={true} />
-        <div className="mt-10 flex flex-col">
+        <div className="mt-10 flex flex-col laptop:p-5">
           <img
             className="w-full h-96 rounded-lg shadow-lg object-cover"
             src={post.image}
@@ -50,7 +52,7 @@ const BlogPost = ({ post }) => {
         <ContentSection content={post.content}></ContentSection>
         <Footer />
       </div>
-    </>
+    </div>
   );
 };
 

@@ -9,9 +9,23 @@ const Header = () => {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
@@ -71,7 +85,7 @@ const Header = () => {
         )}
       </Popover>
       <div
-        className={`mt-10 hidden flex-row items-center justify-between sticky ${theme === "light" && "bg-white"
+        className={`mt-10 hidden flex-row items-center justify-between ${isScrolled ? 'backdrop-opacity-10 backdrop-invert bg-white/10' : '' } sticky ${theme === "light" && "bg-white"
           } dark:text-white top-0 z-10 tablet:flex`}
       >
         <h1

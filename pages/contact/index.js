@@ -26,10 +26,12 @@ const Resume = () => {
         setMount(true);
     }, []);
     return (
-        <>
+        <div className="relative cursor-none">
             <Cursor />
+            <div className="gradient-circle"></div>
+            <div className="gradient-circle-bottom"></div>
             <div
-                className="container mx-auto mb-10 cursor-none"
+                className="container mx-auto mb-10"
             >
                 <Header />
                 <div className="flex flex-col justify-around laptop:mt-20 mt-10 laptop:p-5">
@@ -71,7 +73,7 @@ const Resume = () => {
                 <Socials className="mt-2 laptop:mt-5 laptop:ml-5" />
                 <Footer />
             </div>
-        </>
+        </div>
     );
 };
 
