@@ -1,16 +1,22 @@
-import Head from "next/head";
-import Router, { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useRef } from "react";
 import { stagger } from "../../animations";
-import Button from "../../components/Button";
-import Cursor from "../../components/Cursor";
-import Header from "../../components/Header";
 import { ISOToDate, useIsomorphicLayoutEffect } from "../../utils";
-import { getAllPosts } from "../../utils/api";
-import Footer from "../../components/Footer";
-const Blog = ({ posts }) => {
+import LoadingSpinner from "../../components/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchActivities } from "../../store/activities/slice";
+
+const Activities = () => {
   const text = useRef();
   const router = useRouter();
+  const { activityList, loadingList } = useSelector(state => state.activities)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!activityList) {
+      dispatch(fetchActivities());
+    }
+  }, [dispatch, activityList])
 
   useIsomorphicLayoutEffect(() => {
     stagger(
@@ -21,17 +27,8 @@ const Blog = ({ posts }) => {
   }, []);
 
   return (
-    <div className="relative cursor-none">
-      <Cursor />
-      <Head>
-        <title>Blog</title>
-      </Head>
-      <div className="gradient-circle"></div>
-      <div className="gradient-circle-bottom"></div>
-      <div
-        className="container mx-auto mb-10"
-      >
-        <Header isBlog={true}></Header>
+    <>
+      {loadingList ? <LoadingSpinner /> : <div className="container mx-auto mb-10">
         <div className="mt-10 laptop:p-3">
           <h1
             ref={text}
@@ -39,13 +36,16 @@ const Blog = ({ posts }) => {
           >
             Activities.
           </h1>
+          {activityList && activityList.length === 0 && <div className="h-40 flex justify-center items-center w-full">
+            No activity found
+          </div>}
           <div className="mt-10 grid grid-cols-1 mob:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 justify-between gap-10">
-            {posts &&
-              posts.map((post) => (
+            {activityList &&
+              activityList.map((post) => (
                 <div
-                  className="cursor-pointer relative"
-                  key={post.slug}
-                  onClick={() => router.push(`/activities/${post.slug}`)}
+                  className="cursor-pointer relative animate-fadeInRight"
+                  key={post.id}
+                  onClick={() => router.push(`/activities/${post.id}`)}
                 >
                   <img
                     className="w-full h-60 rounded-lg shadow-lg object-cover"
@@ -53,35 +53,16 @@ const Blog = ({ posts }) => {
                     alt={post.title}
                   ></img>
                   <h2 className="mt-5 text-4xl">{post.title}</h2>
-                  <p className="mt-2 opacity-50 text-lg">{post.preview}</p>
+                  <p className="mt-2 opacity-50 text-lg">{post.description}</p>
                   <span className="text-sm mt-5 opacity-25">
-                    {ISOToDate(post.date)}
+                    {ISOToDate(post.publishedDate)}
                   </span>
                 </div>
               ))}
           </div>
         </div>
-        <Footer />
-      </div>
-    </div>
+      </div>}
+    </>
   );
 };
-
-export async function getStaticProps() {
-  const posts = getAllPosts([
-    "slug",
-    "title",
-    "image",
-    "preview",
-    "author",
-    "date",
-  ]);
-
-  return {
-    props: {
-      posts: [...posts],
-    },
-  };
-}
-
-export default Blog;
+export default Activities;

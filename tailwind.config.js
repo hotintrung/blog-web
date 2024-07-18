@@ -12,7 +12,23 @@ module.exports = {
       desktop: "1280px",
       laptopl: "1440px",
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        fadeInRight: {
+          '0%': {
+            opacity: 0,
+            transform: 'translateY(100%)',
+          },
+          '100%': {
+            opacity: 1,
+            transform: 'translateY(0)',
+          },
+        },
+      },
+      animation: {
+        fadeInRight: 'fadeInRight 1s ease-in-out',
+      },
+    },
   },
   plugins: [],
 };

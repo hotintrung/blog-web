@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import Button from "../Button";
 // Local Data
 
-const Header = () => {
+const Header = ({ userProfile }) => {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -31,14 +31,14 @@ const Header = () => {
   return (
     <>
       <Popover className="block tablet:hidden mt-5">
-        {({ open }) => (
+        {({ open, close }) => (
           <>
             <div className="flex items-center justify-between p-2 laptop:p-0">
               <h1
                 onClick={() => router.push("/")}
                 className="font-medium p-2 laptop:p-0 link"
               >
-                Trung.
+                Welcome, {userProfile && userProfile.firstName}
               </h1>
 
               <div className="flex items-center">
@@ -75,24 +75,24 @@ const Header = () => {
             >
 
               <div className="grid grid-cols-1">
-                <Button onClick={() => router.push("/")}>About Me</Button>
-                <Button onClick={() => router.push("/activities")}>Activities</Button>
-                <Button onClick={() => router.push("/education")}>Education</Button>
-                <Button onClick={() => router.push("/contact")}>Contact</Button>
+                <Button onClick={() => { router.push("/"), close() }}>About Me</Button>
+                <Button onClick={() => { router.push("/activities"), close() }}>Activities</Button>
+                <Button onClick={() => { router.push("/education"), close() }}>Education</Button>
+                <Button onClick={() => { router.push("/contact"), close()}}>Contact</Button>
               </div>
             </Popover.Panel>
           </>
         )}
       </Popover>
       <div
-        className={`mt-10 hidden flex-row items-center justify-between ${isScrolled ? 'backdrop-opacity-10 backdrop-invert bg-white/10' : '' } sticky ${theme === "light" && "bg-white"
+        className={`mt-5 hidden flex-row items-center justify-between ${isScrolled ? 'backdrop-opacity-10 backdrop-invert bg-white/10' : ''} sticky ${theme === "light" && "bg-white"
           } dark:text-white top-0 z-10 tablet:flex`}
       >
         <h1
           onClick={() => router.push("/")}
           className="font-medium cursor-pointer mob:p-2 laptop:ml-5 laptop:p-0"
         >
-          Trung.
+          Welcome, {userProfile && userProfile.firstName}
         </h1>
         <div className="flex">
           <Button onClick={() => router.push("/")}>About Me</Button>

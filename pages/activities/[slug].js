@@ -1,94 +1,54 @@
-import React, { useRef } from "react";
-import { getPostBySlug, getAllPosts } from "../../utils/api";
-import Header from "../../components/Header";
-import ContentSection from "../../components/ContentSection";
-import Footer from "../../components/Footer";
-import Head from "next/head";
-import { useIsomorphicLayoutEffect } from "../../utils";
-import { stagger } from "../../animations";
-import Cursor from "../../components/Cursor";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from "../../components/Loading";
+import { fetchActivityDetail } from "../../store/activities/slice";
 
-const BlogPost = ({ post }) => {
-  const textOne = useRef();
-  const textTwo = useRef();
+const ActivityDetail = () => {
+  const router = useRouter();
+  const param = router.query;
+  const activityId = param?.slug || ''
+  const { activityDetail, loadingDetail } = useSelector(state => state.activities)
 
-  useIsomorphicLayoutEffect(() => {
-    stagger([textOne.current, textTwo.current], { y: 30 }, { y: 0 });
-  }, []);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchActivityDetail(activityId));
+  }, [dispatch, activityId])
 
   return (
-    <div className="relative cursor-none">
-      <Head>
-        <title>{"Blog - " + post.title}</title>
-        <meta name="description" content={post.preview} />
-      </Head>
-      <div className="gradient-circle"></div>
-      <div className="gradient-circle-bottom"></div>
-      <Cursor />
-
-      <div
-        className="container mx-auto mt-10"
-      >
-        <Header isBlog={true} />
-        <div className="mt-10 flex flex-col laptop:p-5">
-          <img
-            className="w-full h-96 rounded-lg shadow-lg object-cover"
-            src={post.image}
-            alt={post.title}
-          ></img>
-          <h1
-            ref={textOne}
-            className="mt-10 text-4xl mob:text-2xl laptop:text-6xl text-bold"
+    <>
+      {loadingDetail ? <LoadingSpinner /> :
+        <>
+          <div
+            className="container mx-auto mt-10"
           >
-            {post.title}
-          </h1>
-          <h2
-            ref={textTwo}
-            className="mt-2 text-xl max-w-4xl text-darkgray opacity-50"
-          >
-            {post.tagline}
-          </h2>
-        </div>
-        <ContentSection content={post.content}></ContentSection>
-        <Footer />
-      </div>
-    </div>
+            {activityDetail &&
+              <>
+                <div className="mt-10 flex flex-col laptop:p-5">
+                  <img
+                    className="w-full h-96 rounded-lg shadow-lg object-cover"
+                    src={activityDetail.image}
+                    alt={activityDetail.title}
+                  ></img>
+                  <h1
+                    className="mt-10 text-4xl mob:text-2xl laptop:text-6xl text-bold animate-fadeInRight"
+                  >
+                    {activityDetail.title}
+                  </h1>
+                  <h2
+                    className="mt-2 text-xl max-w-4xl text-darkgray opacity-50 animate-fadeInRight"
+                  >
+                    {activityDetail.tagline || ''}
+                  </h2>
+                </div>
+              </>
+            }
+          </div>
+        </>
+      }
+    </>
   );
 };
 
-export async function getStaticProps({ params }) {
-  const post = getPostBySlug(params.slug, [
-    "date",
-    "slug",
-    "preview",
-    "title",
-    "tagline",
-    "preview",
-    "image",
-    "content",
-  ]);
-
-  return {
-    props: {
-      post: {
-        ...post,
-      },
-    },
-  };
-}
-
-export async function getStaticPaths() {
-  const posts = getAllPosts(["slug"]);
-
-  return {
-    paths: posts.map((post) => {
-      return {
-        params: {
-          slug: post.slug,
-        },
-      };
-    }),
-    fallback: false,
-  };
-}
-export default BlogPost;
+export default ActivityDetail;
