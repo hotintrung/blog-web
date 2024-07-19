@@ -1,9 +1,13 @@
-import React from "react";
+import React  from "react";
 import Socials from "../../components/Socials";
+import { useSelector } from "react-redux";
+import LoadingSpinner from "../../components/Loading";
 
 const Resume = () => {
+    const { user, loadingUser } = useSelector((state) => state.user);
     return (
         <>
+            {loadingUser && <LoadingSpinner />}
             <div
                 className="container mx-auto mb-10"
             >
@@ -18,8 +22,8 @@ const Resume = () => {
                         suggestions. If you have a specific question or
                         comment, please feel free to email me directly at
                         &nbsp;{""}
-                        <a href={`mailto:abc@abc.com`} className="underline text-cyan-700 cursor-none">
-                            abc@abc.com
+                        <a href={`mailto:${user?.email}`} className="underline text-cyan-700 cursor-none">
+                            {user?.email}
                         </a>
                         . I make an effort to respond to all messages within
                         24 hours, although it may take me longer during busy
@@ -29,12 +33,12 @@ const Resume = () => {
                         possible. Finally, if you prefer to connect on
                         social media, you can find me on{" "}
                         <a
-                            href={"https://instagram.com/"}
+                            href={user?.instagramUrl}
                             target="_blank"
                             className="underline text-cyan-700 cursor-none"
                             rel="noreferrer"
                         >
-                            https://instagram.com/
+                            {user?.instagramUrl}
                         </a>
                         . I post regular updates and engage with my
                         followers there, so don&apos;t hesitate to reach out.

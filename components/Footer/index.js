@@ -10,10 +10,7 @@ const Footer = ({ }) => {
         {/* <Socials className="mt-2 ml-6" /> */}
         <h1 className="text-sm text-bold mt-2 p-2">
 
-          Made With ❤ by{"  "}
-          <Link href="">
-            <a className="underline underline-offset-1"> Trung</a>
-          </Link>
+          Made With ❤ by TeamX
         </h1>
       </div>
 

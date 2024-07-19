@@ -3,17 +3,18 @@ import { faMailBulk } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTwitter,
-  faGithub,
-  faStackOverflow,
+  faFacebook,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-import { useTheme } from "next-themes";
+import { useSelector } from "react-redux";
 
 const Socials = ({ className }) => {
+  const { user } = useSelector((state) => state.user);
+
   return (
     <div className={`${className} flex flex-wrap mob:flex-nowrap link cursor-none`}>
       <a
-        href={"https://github.com"}
+        href={user?.twitterUrl || ''}
         target="_blank"
         rel="noreferrer"
         className="cursor-none"
@@ -24,31 +25,19 @@ const Socials = ({ className }) => {
         />
       </a>
       <a
-        href={"https://github.com"}
+        href={user?.facebookUrl || ''}
         target="_blank"
         rel="noreferrer"
         className="cursor-none"
 
       >
         <FontAwesomeIcon
-          icon={faGithub}
+          icon={faFacebook}
           className="pr-5 text-2xl transition-transform transform hover:scale-150 duration-200 ease-in-out"
         />
       </a>
       <a
-        href={"https://github.com"}
-        target="_blank"
-        rel="noreferrer"
-        className="cursor-none"
-
-      >
-        <FontAwesomeIcon
-          icon={faStackOverflow}
-          className="pr-5 text-2xl transition-transform transform hover:scale-150 duration-200 ease-in-out"
-        />
-      </a>
-      <a
-        href={"https://github.com"}
+        href={user?.instagramUrl || ''}
         target="_blank"
         rel="noreferrer"
         className="cursor-none"
@@ -60,7 +49,7 @@ const Socials = ({ className }) => {
         />
       </a>
       <a
-        href={`mailto:${"https://github.com"}`}
+        href={`mailto:${user?.email}`}
         target="_blank"
         rel="noreferrer"
         className="cursor-none"

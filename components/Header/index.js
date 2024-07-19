@@ -92,7 +92,7 @@ const Header = ({ userProfile }) => {
           onClick={() => router.push("/")}
           className="font-medium cursor-pointer mob:p-2 laptop:ml-5 laptop:p-0"
         >
-          Welcome, {userProfile && userProfile.firstName}
+          Welcome, {userProfile && userProfile.lastName}
         </h1>
         <div className="flex">
           <Button onClick={() => router.push("/")}>About Me</Button>
