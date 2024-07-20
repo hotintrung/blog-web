@@ -1,9 +1,10 @@
 // store/slice.js
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { API_URL } from '../../utils';
 
 export const fetchUserProfile = createAsyncThunk('user/fetchUserProfile', async () => {
     try {
-        const response = await fetch(`http://demo.kaidev.site/api/web/init`);
+        const response = await fetch(`${API_URL}api/web/init`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

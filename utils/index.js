@@ -25,3 +25,5 @@ export function getRandomImage() {
   ];
   return randomImageUrl[Math.floor(Math.random() * randomImageUrl.length)];
 }
+
+export const API_URL = 'https://demo.kaidev.site/'
