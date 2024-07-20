@@ -5,15 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchEducation } from "../../store/education/slice";
 import LoadingSpinner from "../../components/Loading";
 
-const Resume = () => {
+const Education = () => {
   const theme = useTheme();
   const dispatch = useDispatch()
   const { loadingEducation, education } = useSelector(state => state.education)
+  const { user } = useSelector((state) => state.user);
+
   useEffect(() => {
     if (!education) {
       dispatch(fetchEducation())
     }
-  }, [education])
+  }, [dispatch, education])
 
   return (
     <div
@@ -26,8 +28,8 @@ const Resume = () => {
               className={`w-full ${theme.theme === "dark" ? "bg-slate-800" : "bg-gray-50"
                 } max-w-4xl p-20 mob:p-5 desktop:p-20 rounded-lg shadow-sm`}
             >
-              <h1 className="text-3xl font-bold">Trung</h1>
-              <h2 className="text-xl mt-5">👋  I&apos;m a software engineer, product designer, and maker.</h2>
+              <h1 className="text-3xl font-bold">{user && `${user?.firstName} ${user?.lastName}`}</h1>
+              <h2 className="text-xl mt-5">👋  {education.bio}</h2>
               <h2 className="w-4/5 text-xl mt-5 opacity-50">
                 {education.description}
               </h2>
@@ -48,26 +50,27 @@ const Resume = () => {
               </div>
               <div className="mt-5">
                 <h1 className="text-2xl font-bold">Education</h1>
-                <div className="mt-2">
-                  <h2 className="text-lg">{education.education.universityName}</h2>
+                {education?.educations.map((edu, index) => (
+                  <div key={index} className="mt-2">
+                  <h2 className="text-lg">{edu?.universityName}</h2>
                   <h3 className="text-sm opacity-75">
-                    {education.education.universityDate}
+                    {edu?.universityDate}
                   </h3>
                   <p className="text-sm mt-2 opacity-50">
-                    {education.education.universityPara}
+                    {edu?.universityPara}
                   </p>
                 </div>
+                ))}
               </div>
               <div className="mt-5">
                 <h1 className="text-2xl font-bold">Skills</h1>
                 <div className="flex mob:flex-col desktop:flex-row justify-between">
-                  {education.languages && (
+                  {education.skills && (
                     <div className="mt-2 mob:mt-5">
-                      <h2 className="text-lg">Languages</h2>
                       <ul className="list-disc">
-                        {education.languages.map((language, index) => (
+                        {education.skills.map((skill, index) => (
                           <li key={index} className="ml-5 py-2">
-                            {language}
+                            {skill}
                           </li>
                         ))}
                       </ul>
@@ -109,4 +112,4 @@ const Resume = () => {
   );
 };
 
-export default Resume;
+export default Education;

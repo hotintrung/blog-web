@@ -3,7 +3,7 @@ import Socials from "../../components/Socials";
 import { useSelector } from "react-redux";
 import LoadingSpinner from "../../components/Loading";
 
-const Resume = () => {
+const Contact = () => {
     const { user, loadingUser } = useSelector((state) => state.user);
     return (
         <>
@@ -53,4 +53,4 @@ const Resume = () => {
     );
 };
 
-export default Resume;
+export default Contact;
