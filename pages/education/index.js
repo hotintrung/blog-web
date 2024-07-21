@@ -70,7 +70,7 @@ const Education = () => {
                       <ul className="list-disc">
                         {education.skills.map((skill, index) => (
                           <li key={index} className="ml-5 py-2">
-                            {skill}
+                            {skill?.name}
                           </li>
                         ))}
                       </ul>
