@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useTheme } from "next-themes";
 import ProjectResume from "../../components/ProjectResume";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchEducation, getFileById } from "../../store/education/slice";
+import { fetchEducation } from "../../store/education/slice";
 import LoadingSpinner from "../../components/Loading";
 import Image from "next/image";
 
@@ -37,8 +37,20 @@ const Education = () => {
     }
   };
 
-  const onClickFile = (item) => {
-    dispatch(getFileById(item))
+  const onClickFile = async (item) => {
+    const fetchContentFile = await fetch(item.fileUrl);
+    if (!fetchContentFile.ok) {
+      throw new Error('Network fetchContentFile was not ok');
+    }
+    const blob = await fetchContentFile.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = item.fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(blobUrl);
   }
 
   return (
