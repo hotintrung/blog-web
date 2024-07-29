@@ -38,19 +38,13 @@ const Education = () => {
   };
 
   const onClickFile = async (item) => {
-    const fetchContentFile = await fetch(item.fileUrl);
-    if (!fetchContentFile.ok) {
-      throw new Error('Network fetchContentFile was not ok');
-    }
-    const blob = await fetchContentFile.blob();
-    const blobUrl = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
-    link.href = blobUrl;
-    link.download = item.fileName;
+    link.href = item.fileUrl;
+    link.target = 'blank';
+    link.setAttribute('download', item.fileName);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    window.URL.revokeObjectURL(blobUrl);
   }
 
   return (
