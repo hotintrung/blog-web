@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../../components/Loading";
 import { fetchActivityDetail } from "../../store/activities/slice";
 import ImageCarousel from "../../components/ImageCarousel";
-import Image from "next/image";
 import ReactPlayer from "react-player";
 
 const ActivityDetail = () => {
@@ -41,11 +40,9 @@ const ActivityDetail = () => {
                   <div className="w-full h-96 rounded-lg">
                     {images.length > 1 ? <ImageCarousel images={images} /> :
                       <div className="relative h-96 mob:h-64 laptop:h-96 w-full">
-                        <Image
+                        <img
                           src={activityDetail?.imageArticleUrl}
-                          layout="fill"
-                          objectFit="cover"
-                          className="rounded-lg"
+                          className="rounded-lg bg-cover"
                         />
                       </div>
                     }

@@ -55,7 +55,6 @@ const activitiesSlice = createSlice({
                 state.errorList = null;
             })
             .addCase(fetchActivities.fulfilled, (state, action) => {
-                console.log(action.payload);
                 state.loadingList = false;
                 state.activityList = [...state.activityList, ...action.payload.items];
                 state.totalItems = action.payload.totalItems
