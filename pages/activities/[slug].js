@@ -41,8 +41,8 @@ const ActivityDetail = () => {
                     {images.length > 1 ? <ImageCarousel images={images} /> :
                       <div className="relative h-96 mob:h-64 laptop:h-96 w-full">
                         <img
-                          src={activityDetail?.imageArticleUrl}
-                          className="rounded-lg bg-cover"
+                          src={activityDetail?.imageHeaders[0]?.url}
+                          className="rounded-lg bg-cover object-cover h-96 mob:h-64 laptop:h-96 w-full"
                         />
                       </div>
                     }
