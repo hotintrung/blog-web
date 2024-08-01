@@ -31,7 +31,7 @@ export default function Home() {
                       <img
                         src={user.urlHelloPicture}
                         alt={user.altHelloPicture}
-                        className="w-full"
+                        className="object-cover w-80 h-80"
                       />
                     </div>
                   </div>
@@ -46,7 +46,7 @@ export default function Home() {
                       <img
                         src={user.urlProfilePicture}
                         alt={user.altProfilePicture}
-                        className="w-full"
+                        className="object-cover w-80 h-80"
                       />
                     </div>
                   </div>

@@ -22,7 +22,7 @@ const ImageCarousel = ({ images }) => {
                     <img
                         src={image}
                         alt={`Slide ${index}`}
-                        className="rounded-lg bg-cover"
+                        className="rounded-lg bg-cover object-cover h-96 mob:h-64 laptop:h-96 w-full"
                     />
                 </div>
             ))}
