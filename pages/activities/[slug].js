@@ -64,7 +64,7 @@ const ActivityDetail = () => {
                   </h2>
                   {activityDetail.videoUrl &&
                     <div className="mt-10 w-full flex items-center justify-center">
-                      <div className="w-full max-w-3xl h-96 rounded-lg shadow-lg react-player">
+                      <div className="w-full max-w-3xl h-96 rounded-lg shadow-lg">
                         <ReactPlayer url={activityDetail.videoUrl} width="100%" height="100%" controls />
                       </div>
                     </div>

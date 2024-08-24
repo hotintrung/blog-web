@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
         <div className="flex flex-col min-h-screen relative cursor-none">
             <Cursor />
             <Head>
-                <title>Web</title>
+                <title>Welcome {user?.lastName}</title>
             </Head>
             <div className="gradient-circle"></div>
             <div className="gradient-circle-bottom"></div>
