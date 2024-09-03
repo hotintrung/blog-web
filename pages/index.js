@@ -26,12 +26,12 @@ export default function Home() {
                   <p className="mt-2 opacity-50 text-lg animate-fadeInRight">{user.bio}</p>
                 </div>
                 <div className="flex items-center justify-center mob:w-full laptop:order-2 mob:order-1 mob:mb-5">
-                  <div className="w-80 h-80 ">
+                  <div className="w-96 h-96 ">
                     <div className=" overflow-hidden rounded-xl rotate-3">
                       <img
                         src={user.urlHelloPicture}
                         alt={user.altHelloPicture}
-                        className="object-cover w-80 h-80"
+                        className="object-cover w-96 h-96"
                       />
                     </div>
                   </div>
@@ -60,11 +60,11 @@ export default function Home() {
                   <div className="grid grid-cols-1 divide-y animate-fadeInRight">
                     <div className="grid grid-cols-2 gap-2 desktop:p-5 tablet:p-2 mob:p-2">
                       <div className="opacity-50 text-lg">Name:</div>
-                      <div className="opacity-50 text-lg">{user.firstName} {user.lastName}</div>
+                      <div className="opacity-50 text-lg break-words">{user.firstName} {user.lastName}</div>
                     </div>
                     <div className="grid grid-cols-2 gap-2 desktop:p-5 tablet:p-2 mob:p-2">
                       <div className="opacity-50 text-lg">Email:</div>
-                      <div className="opacity-50 text-lg">{user.email}</div>
+                      <div className="opacity-50 text-lg break-words">{user.email}</div>
                     </div>
                     <div className="grid grid-cols-2 gap-2 desktop:p-5 tablet:p-2 mob:p-2">
                       <div className="opacity-50 text-lg">Phone:</div>
